@@ -54,20 +54,19 @@ def main():
             # driver.find_element_by_tag_name('body').send_keys(inputText)
             for sendText in inputText:
                 driver.find_element_by_tag_name('body').send_keys(sendText)
-                time.sleep(0.01)
+                time.sleep(0.005)
             logging.debug(inputText)
             time.sleep(1)
         except:
             break
         logging.debug("Questioons are done")
-    time.sleep(5)
+    time.sleep(3)
 
     #twitter login
     driver.find_element_by_xpath('//*[@id="twitter_btn"]').click()
     logging.debug("move to twitter")
     time.sleep(3)
-    # driver.find_element_by_id("status").click()
-    # driver.find_element_by_id("username_or_email").send_keys(secretThings.twitterId)
+    # driver.find_element_by_xpath('//*[@id="update-form"]/div[3]/fieldset[1]/div[1]/label').send_keys(secretThings.twitterId)
     # driver.find_element_by_id("password").send_keys(secretThings.twiPass)
     # driver.find_element_by_xpath('//*[@id="update-form"]/div[3]/fieldset[2]/input').click()
     time.sleep(10)
