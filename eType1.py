@@ -54,9 +54,9 @@ def main():
             # driver.find_element_by_tag_name('body').send_keys(inputText)
             for sendText in inputText:
                 driver.find_element_by_tag_name('body').send_keys(sendText)
-                time.sleep(0.005)
+                time.sleep(0.01)
             logging.debug(inputText)
-            time.sleep(1)
+            time.sleep(0.7)
         except:
             break
         logging.debug("Questioons are done")
