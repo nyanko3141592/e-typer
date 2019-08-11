@@ -5,8 +5,6 @@ import sys
 from selenium.webdriver.common.keys import Keys
 import secretThings
 
-
-
 def main():
     #logging.debugの設定
     try:debugLevel = int(sys.argv[1])
