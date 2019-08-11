@@ -56,8 +56,8 @@ def main():
             logging.debug(inputText)
             time.sleep(0.7)
         except:
+            logging.debug("Questioons are done")
             break
-        logging.debug("Questioons are done")
     time.sleep(3)
 
     #wait
