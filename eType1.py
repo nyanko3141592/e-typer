@@ -3,12 +3,12 @@ from selenium import webdriver
 import logging
 import sys
 from selenium.webdriver.common.keys import Keys
-
 import secretThings
 
 
+
 def main():
-    #logging.debugの設定　省略可能
+    #logging.debugの設定
     try:debugLevel = int(sys.argv[1])
     except:debugLevel = 0
 
@@ -23,35 +23,55 @@ def main():
     logging.debug("show browser of eTyping")
 
     #ウィンドウの最大化　省略化
-    driver.maximize_window()
+    # driver.maximize_window()
 
     #login
     driver.find_element_by_id("mail").send_keys(secretThings.mail)
     driver.find_element_by_id("password").send_keys(secretThings.password)
-    driver.find_element_by_xpath("//*[@id=\"login_btn\"]").click()
+    driver.find_element_by_id("login_btn").click()
 
     #start e-typing
     driver.find_element_by_xpath("// *[ @ id = \"level_check_member\"] / a").click()
-    time.sleep(5)
+    time.sleep(2)
     logging.debug("move to game")
 
     driver.switch_to.frame('typing_content')#frameの変更　chrome内に生成されたゲーム画面に移動
-    driver.find_element_by_xpath("// *[ @ id = \"start_btn\"]").click()
+    driver.find_element_by_xpath('//div[@id="start_btn"]').click()
     logging.debug("ready for game")
 
-    #game start send SPACE key
-    driver.find_element_by_tag_name('body').send_keys(Keys.SPACE)
-    logging.debug("GAME START")
+    time.sleep(1)
+
+    body = driver.find_element_by_tag_name('body')
+    body.send_keys(Keys.SPACE)
+
     time.sleep(3)
     logging.debug("GO")
 
+    #回答
     while True:
-        inputText = driver.find_element_by_xpath('//*[@id="sentenceText"]/div/span[2]')
-        logging.debug(inputText)
-        time.sleep(5)
+        try:
+            inputText = driver.find_element_by_xpath('//div[@id="sentenceText"]').find_elements_by_tag_name('span')[1].text
+            # driver.find_element_by_tag_name('body').send_keys(inputText)
+            for sendText in inputText:
+                driver.find_element_by_tag_name('body').send_keys(sendText)
+                time.sleep(0.01)
+            logging.debug(inputText)
+            time.sleep(1)
+        except:
+            break
+        logging.debug("Questioons are done")
+    time.sleep(5)
 
-
+    #twitter login
+    driver.find_element_by_xpath('//*[@id="twitter_btn"]').click()
+    logging.debug("move to twitter")
+    time.sleep(3)
+    # driver.find_element_by_id("status").click()
+    # driver.find_element_by_id("username_or_email").send_keys(secretThings.twitterId)
+    # driver.find_element_by_id("password").send_keys(secretThings.twiPass)
+    # driver.find_element_by_xpath('//*[@id="update-form"]/div[3]/fieldset[2]/input').click()
     time.sleep(10)
+    input()
     driver.quit()
     logging.debug('====DONE====')
 
