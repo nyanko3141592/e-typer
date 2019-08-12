@@ -26,7 +26,7 @@ def startEtyping(driver):
 def solveQuestions(driver):
     global questionFlag
     try:
-        inputText = driver.find_element_by_css_selector('#sentenceText > div > span:nth-child(2)').find_elements_by_tag_name('span')[1].text
+        inputText = driver.find_element_by_css_selector('#sentenceText').find_elements_by_css_selector('span')[1].text
         for sendText in inputText:
             driver.find_element_by_tag_name('body').send_keys(sendText)
             time.sleep(0.01)
