@@ -14,7 +14,7 @@ def startEtyping(driver):
     time.sleep(2)
 
     driver.switch_to.frame('typing_content')#frameの変更　chrome内に生成されたゲーム画面に移動
-    driver.find_element_by_xpath('//div[@id="start_btn"]').click()
+    driver.find_element_by_css_selector('#start_btn').click()
 
     time.sleep(1)
 
@@ -26,11 +26,11 @@ def startEtyping(driver):
 def solveQuestions(driver):
     global questionFlag
     try:
-        inputText = driver.find_element_by_xpath('//div[@id="sentenceText"]').find_elements_by_tag_name('span')[1].text
+        inputText = driver.find_element_by_css_selector('#sentenceText > div > span:nth-child(2)').find_elements_by_tag_name('span')[1].text
         for sendText in inputText:
             driver.find_element_by_tag_name('body').send_keys(sendText)
             time.sleep(0.01)
-        time.sleep(0.7)
+        time.sleep(0.5)
     except:
         questionFlag = False
         time.sleep(3)
