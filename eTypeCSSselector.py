@@ -30,7 +30,7 @@ def solveQuestions(driver):
         for sendText in inputText:
             driver.find_element_by_tag_name('body').send_keys(sendText)
             time.sleep(0.01)
-        time.sleep(0.5)
+        time.sleep(1)
     except:
         questionFlag = False
         time.sleep(3)
